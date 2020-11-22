@@ -9,7 +9,8 @@ function App() {
     <div className="App">
       <header className="App-header">
         <Button >hello</Button>
-        <Button size={ButtonSize.Large}>
+        <Button size={ButtonSize.Large}
+          onClick={(e) => { e.preventDefault(); alert('abcd') }}>
           default large
         </Button>
         <Button disabled btnType={ButtonType.Primary} size={ButtonSize.Large}>
