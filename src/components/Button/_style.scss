@@ -9,13 +9,20 @@
   vertical-align: middle;
   background-image: none;
   border: $btn-border-width solid transparent;
-  padding: $btn-padding-y $btn-padding-x;
-  font-size: $btn-font-size;
-  border-radius: $border-radius;
-  -webkit-border-radius: $border-radius;
-  -moz-border-radius: $border-radius;
-  -ms-border-radius: $border-radius;
-  -o-border-radius: $border-radius;
+  // 如下mixin替换
+  @include button-size(
+    $btn-padding-y,
+    $btn-padding-x,
+    $btn-font-size,
+    $border-radius
+  );
+  // padding: $btn-padding-y $btn-padding-x;
+  // font-size: $btn-font-size;
+  // border-radius: $border-radius;
+  // -webkit-border-radius: $border-radius;
+  // -moz-border-radius: $border-radius;
+  // -ms-border-radius: $border-radius;
+  // -o-border-radius: $border-radius;
   box-shadow: $btn-box-shadow;
   cursor: pointer;
   transition: $btn-transition;
@@ -24,6 +31,7 @@
   -ms-transition: $btn-transition;
   -o-transition: $btn-transition;
 
+  // 含有disabled属性或者是disabled类
   &.disabled,
   &[disabled] {
     cursor: not-allowed;
@@ -33,5 +41,59 @@
     > * {
       pointer-events: none;
     }
+  }
+}
+
+.btn-lg {
+  @include button-size(
+    $btn-padding-y-lg,
+    $btn-padding-x-lg,
+    $btn-font-size-lg,
+    $border-radius-lg
+  );
+}
+
+.btn-sm {
+  @include button-size(
+    $btn-padding-y-sm,
+    $btn-padding-x-sm,
+    $btn-font-size-sm,
+    $border-radius-sm
+  );
+}
+
+.btn-primary {
+  @include button-style($primary, $primary, $white);
+}
+
+.btn-danger {
+  @include button-style($danger, $danger, $white);
+}
+
+.btn-default {
+  @include button-style($white, $gray-400, $body-color, $white, $primary);
+}
+
+.btn-link {
+  font-weight: $font-weight-normal;
+  color: $btn-link-color;
+  text-decoration: $link-decoration;
+  box-shadow: none;
+  &:hover {
+    color: $btn-link-hover-color;
+    text-decoration: $link-hover-decoration;
+  }
+  &:focus,
+  &.focus {
+    // color: $btn-link-hover-color;
+    text-decoration: $link-hover-decoration;
+    box-shadow: none;
+  }
+  &:disabled,
+  &.disabled {
+    color: $btn-link-disabled-color;
+    // text-decoration: $link-hover-decoration;
+    box-shadow: none;
+    pointer-events: none;
   }
 }
