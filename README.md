@@ -1,7 +1,9 @@
 
 
 * [快速开始](docs/quick_start.md)
+* [色彩体系](docs/color.md)
 
+* [yrm](docs/yrm.md)
 
 * 修改依赖包,package.json
 ```
@@ -14,4 +16,10 @@
 
 ```
       "jsx": "preserve",
+```
+
+* 添加node-sass支持
+
+```bash 
+yarn add node-sass@4.12 --save
 ```
