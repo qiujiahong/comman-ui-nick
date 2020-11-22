@@ -7,6 +7,9 @@
 * [yrm](docs/yrm.md)
 * [发布](docs/yarn.md)
 
+* [npm仓库](https://www.npmjs.com/package/comman-ui-nick)
+
+
 * 修改依赖包,package.json
 ```
     "react-scripts": "4.0.0-next.98",
