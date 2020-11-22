@@ -5,6 +5,7 @@
 
 * [添加classnames](docs/classnames.md)
 * [yrm](docs/yrm.md)
+* [发布](docs/yarn.md)
 
 * 修改依赖包,package.json
 ```
