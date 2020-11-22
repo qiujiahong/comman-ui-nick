@@ -1,9 +1,13 @@
 {
   "name": "comman-ui-nick",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "private": false,
   "publishConfig": {
-    "registry": "https://registry.npmjs.com"
+    "registry": "https://registry.yarnpkg.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/qiujiahong/comman-ui-nick.git"
   },
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.4",
