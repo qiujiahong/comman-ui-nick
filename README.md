@@ -3,6 +3,7 @@
 * [快速开始](docs/quick_start.md)
 * [色彩体系](docs/color.md)
 
+* [添加classnames](docs/classnames.md)
 * [yrm](docs/yrm.md)
 
 * 修改依赖包,package.json

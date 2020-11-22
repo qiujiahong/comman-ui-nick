@@ -1,4 +1,5 @@
 import React from 'react';
+import Button, { ButtonType, ButtonSize } from './components/Button/button'
 // import logo from './logo.svg';
 // import './App.css';
 
@@ -7,13 +8,21 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <h1>hello word</h1>
+        <Button disabled>abc</Button>
+        <Button btnType={ButtonType.Primary} size={ButtonSize.Large}>
+          abc
+        </Button>
+        <Button btnType={ButtonType.Link} size={ButtonSize.Large}
+          href="https://www.baidu.com">
+          baidu link
+        </Button>
+        {/* <h1>hello word</h1>
         <h2>hello word</h2>
         <h3>hello word</h3>
         <hr />
         <code>
           const a = 'b'
-        </code>
+        </code> */}
         <p>
           Edit <code>src/App.tsx</code> and save to reload.
         </p>
