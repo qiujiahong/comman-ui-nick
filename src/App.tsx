@@ -1,5 +1,6 @@
 import React from 'react';
 import Button, { ButtonType, ButtonSize } from './components/Button/button'
+import Alert from './components/Alert/alert'
 // import logo from './logo.svg';
 // import './App.css';
 
@@ -8,6 +9,8 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
+        <Alert title="title" message="消息"></Alert>
+        <Alert title="title111" message="消息22" type="danger"></Alert>
         <Button >hello</Button>
         <Button size={ButtonSize.Large}
           onClick={(e) => { e.preventDefault(); alert('abcd') }}>
