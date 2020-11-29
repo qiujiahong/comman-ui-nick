@@ -8,23 +8,12 @@
 * [发布](docs/yarn.md)
 
 * [npm仓库](https://www.npmjs.com/package/comman-ui-nick)
+* [添加sass支持](docs/sass.md)
+
+* [jest](docs/jest.md)
+* [react test library](docs/react_test_lib.md)
 
 
-* 修改依赖包,package.json
-```
-    "react-scripts": "4.0.0-next.98",
-    "typescript": "^4.1.0",
+* [常见问题](docs/trouble.md)
 
-```
 
-* tsconfig.json
-
-```
-      "jsx": "preserve",
-```
-
-* 添加node-sass支持
-
-```bash 
-yarn add node-sass@4.12 --save
-```
