@@ -1,6 +1,8 @@
 import React from 'react';
 import Button, { ButtonType, ButtonSize } from './components/Button/button'
 import Alert from './components/Alert/alert'
+import Menu from './components/Menu/menu'
+import MenuItem from './components/Menu/menuItem'
 // import logo from './logo.svg';
 // import './App.css';
 
@@ -9,6 +11,13 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
+        <Menu defaultIndex={0}>
+          <MenuItem>cool link 0</MenuItem>
+          <MenuItem>cool link 1</MenuItem>
+          <MenuItem>cool link 2</MenuItem>
+        </Menu>
+
+
         <Alert title="title" message="消息"></Alert>
         <Alert title="title111" message="消息22" type="danger"></Alert>
         <Button >hello</Button>

@@ -12,6 +12,7 @@
 
 * [jest](docs/jest.md)
 * [react test library](docs/react_test_lib.md)
+* [jest-dom](docs/jest_dom.md)
 
 
 * [常见问题](docs/trouble.md)
