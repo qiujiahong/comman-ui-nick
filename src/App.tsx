@@ -8,6 +8,10 @@ import MenuItem from './components/Menu/menuItem'
 
 
 function App() {
+
+  const closeAlert1 = () => {
+    console.log("on close alert1")
+  }
   return (
     <div className="App">
       <header className="App-header">
@@ -17,8 +21,7 @@ function App() {
           <MenuItem>cool link 2</MenuItem>
         </Menu>
 
-
-        <Alert title="title" message="消息"></Alert>
+        <Alert title="title" message="消息" onClose={closeAlert1}></Alert>
         <Alert title="title111" message="消息22" type="danger"></Alert>
         <Button >hello</Button>
         <Button size={ButtonSize.Large}

@@ -14,13 +14,15 @@ interface BaseAlertProps {
   title?: string
   message?: string
   type?: AlertType
+  onClose?: () => void
 }
 
 const Alert: React.FC<BaseAlertProps> = (props) => {
   const {
     title,
     message,
-    type
+    type,
+    onClose
   } = props
 
   // const classes = classNames('btn', className, {
@@ -41,7 +43,7 @@ const Alert: React.FC<BaseAlertProps> = (props) => {
     <div>
       {message}
     </div>
-    <div className={'close'}>
+    <div className={'close'} onClick={onClose}>
       x
     </div>
   </div>)
