@@ -18,3 +18,5 @@
 * [常见问题](docs/trouble.md)
 
 
+
+typescript => es modules
