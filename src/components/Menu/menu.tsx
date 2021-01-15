@@ -1,15 +1,25 @@
-import React from 'react'
+import React, { useState, createContext } from 'react'
 import classNames from 'classnames'
 
+type SelectCallBack = (selectedIndex: number) => void
 
 type MenuMode = 'horizontal' | 'vertical'
 export interface MenuProps {
-  defaultIndex?: number;
+  defaultIndex?: number;  // 默认高亮
   className?: string;
   mode?: MenuMode;
   style?: React.CSSProperties;
-  onSelect?: (selectedIndex: number) => void
+  onSelect?: SelectCallBack
 }
+
+interface IMenuContext {
+  index: number;
+  // 问号是可选
+  onSelect?: SelectCallBack;
+}
+
+// 创建contex
+export const MenuContext = createContext<IMenuContext>({ index: 0 })
 
 const Menu: React.FC<MenuProps> = (props) => {
   const {
@@ -17,14 +27,29 @@ const Menu: React.FC<MenuProps> = (props) => {
     mode,
     style,
     children,
-    defaultIndex
+    defaultIndex,
+    onSelect,
   } = props;
+  const [currentActive, setActive] = useState(defaultIndex)
   const classes = classNames('viking-meu', className, {
-    'menu-vertical': mode == 'vertical'
+    'menu-vertical': mode === 'vertical'
   })
+  const handleClick = (index: number) => {
+    setActive(index)
+    if (onSelect) {
+      onSelect(index)
+    }
+  }
+  const passedContext: IMenuContext = {
+    index: currentActive ? currentActive : 0,
+    onSelect: onSelect
+  }
   return (
     <ul className={classes} style={style}>
-      {children}
+      {/* 组件内部是自定义的 */}
+      <MenuContext.Provider value={passedContext}>
+        {children}
+      </MenuContext.Provider>
     </ul>
   )
 }
