@@ -31,7 +31,7 @@ const Menu: React.FC<MenuProps> = (props) => {
     onSelect,
   } = props;
   const [currentActive, setActive] = useState(defaultIndex)
-  const classes = classNames('viking-meu', className, {
+  const classes = classNames('viking-menu', className, {
     'menu-vertical': mode === 'vertical'
   })
   const handleClick = (index: number) => {
@@ -42,7 +42,7 @@ const Menu: React.FC<MenuProps> = (props) => {
   }
   const passedContext: IMenuContext = {
     index: currentActive ? currentActive : 0,
-    onSelect: onSelect
+    onSelect: handleClick
   }
   return (
     <ul className={classes} style={style}>
