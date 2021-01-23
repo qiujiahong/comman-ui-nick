@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { render, RenderResult } from "@testing-library/react"
+import { fireEvent, render, RenderResult, cleanup } from "@testing-library/react"
 
 import Menu, { MenuProps } from './menu'
 import MenuItem from './menuItem'
@@ -15,7 +15,7 @@ const testVerProps: MenuProps = {
   mode: 'vertical'
 }
 
-const generateMenu = (props: any) => {
+const generateMenu = (props: MenuProps) => {
   return (
     <Menu {...props}>
       <MenuItem index={0}>
@@ -35,15 +35,32 @@ let wrapper: RenderResult, menuElement: HTMLElement, activeElement: HTMLElement,
 describe('test Menu and MenuItem component', () => {
   beforeEach(() => {
     wrapper = render(generateMenu(testProps))
+    menuElement = wrapper.getByTestId("test-menu")
+    activeElement = wrapper.getByText("active")
+    disabledElement = wrapper.getByText("disabled")
+
   })
   it("should render corrent Menu and MenuItem based on default props", () => {
+    expect(menuElement).toBeInTheDocument()
+    expect(menuElement).toHaveClass("viking-menu test")
+    expect(menuElement.getElementsByTagName("li").length).toEqual(3)
+    expect(activeElement).toHaveClass("menu-item is-active")
+    expect(disabledElement).toHaveClass("menu-item is-disabled")
 
   })
   it("click items should change active and call the right call back", () => {
-
+    const thirdItem = wrapper.getByText("xyz")
+    fireEvent.click(thirdItem)
+    expect(thirdItem).toHaveClass("is-active")
+    expect(testProps.onSelect).toHaveBeenCalledWith(2)
+    fireEvent.click(disabledElement)
+    expect(disabledElement).not.toHaveClass("is-active")
+    expect(testProps.onSelect).not.toHaveBeenCalledWith(1)
   })
   it('should render vertical mode when mode is set to vertical ', () => {
-
+    cleanup()
+    const wrapper = render(generateMenu(testVerProps))
+    const menuElement = wrapper.getByTestId("test-menu")
+    expect(menuElement).toHaveClass("menu-vertical")
   })
-
 })

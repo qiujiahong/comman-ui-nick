@@ -45,7 +45,7 @@ const Menu: React.FC<MenuProps> = (props) => {
     onSelect: handleClick
   }
   return (
-    <ul className={classes} style={style}>
+    <ul className={classes} style={style} data-testid="test-menu">
       {/* 组件内部是自定义的 */}
       <MenuContext.Provider value={passedContext}>
         {children}
