@@ -28,9 +28,8 @@
     "web-vitals": "^0.2.4"
   },
   "scripts": {
-    "clean": "rimraf ./build",
     "start": "react-scripts start",
-    "build": "yarn run clean && yarn run build-ts && yarn run build-css",
+    "build": "react-scripts build",
     "build-ts": "tsc -p tsconfig.build.json",
     "build-css": "node-sass ./src/styles/index.scss ./build/index.css",
     "test": "react-scripts test",
@@ -53,8 +52,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "rimraf": "^3.0.2"
   }
 }
