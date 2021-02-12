@@ -2,6 +2,9 @@
   "name": "comman-ui-nick",
   "version": "0.1.2",
   "private": false,
+  "main": "build/index.js",
+  "module": "build/index.js",
+  "types": "build/index.d.ts",
   "publishConfig": {
     "registry": "https://registry.yarnpkg.com"
   },
