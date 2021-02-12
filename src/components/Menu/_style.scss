@@ -45,3 +45,23 @@
     }
   }
 }
+
+.submenu-item {
+  position: relative;
+}
+
+.viking-submenu {
+  list-style: none;
+  padding-left: 0;
+  white-space: nowrap;
+  .menu-item {
+    padding: $menu-item-padding-y $menu-item-padding-y;
+    cursor: pointer;
+    transition: $menu-transition;
+    -webkit-transition: $menu-transition;
+    -moz-transition: $menu-transition;
+    -ms-transition: $menu-transition;
+    -o-transition: $menu-transition;
+    color: $body-color;
+  }
+}

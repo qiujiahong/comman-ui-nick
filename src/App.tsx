@@ -3,6 +3,8 @@ import Button, { ButtonType, ButtonSize } from './components/Button/button'
 import Alert from './components/Alert/alert'
 import Menu from './components/Menu/menu'
 import MenuItem from './components/Menu/menuItem'
+import SubMenu from './components/Menu/subMenu'
+
 // import logo from './logo.svg';
 // import './App.css';
 
@@ -16,11 +18,24 @@ function App() {
     <div className="App">
       <header className="App-header">
         <Menu mode={'vertical'} defaultIndex={0} onSelect={(index) => { alert(index) }}>
-          <MenuItem index={0}>cool link 0</MenuItem>
-          <MenuItem index={1} disabled>cool link 1</MenuItem>
-          <MenuItem index={2}>cool link 2</MenuItem>
+          <MenuItem >cool link 0</MenuItem>
+          <MenuItem disabled>cool link 1</MenuItem>
+          <SubMenu title='dropdown'>
+            <MenuItem >drop down 1</MenuItem>
+            <MenuItem >drop down 2</MenuItem>
+          </SubMenu>
+          <MenuItem >cool link 2</MenuItem>
         </Menu>
 
+        <Menu mode={'horizontal'} defaultIndex={0} onSelect={(index) => { alert(index) }}>
+          <MenuItem >cool link 0</MenuItem>
+          <MenuItem disabled>cool link 1</MenuItem>
+          <SubMenu title='dropdown'>
+            <MenuItem >drop down 1</MenuItem>
+            <MenuItem >drop down 2</MenuItem>
+          </SubMenu>
+          <MenuItem >cool link 2</MenuItem>
+        </Menu>
         <Alert title="title" message="消息" onClose={closeAlert1}></Alert>
         <Alert title="title111" message="消息22" type="danger"></Alert>
         <Button >hello</Button>
