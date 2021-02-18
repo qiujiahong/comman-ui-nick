@@ -1,13 +1,22 @@
 {
-  "name": "vikingship",
-  "version": "0.1.3",
+  "name": "vikingship1111",
+  "version": "0.1.4",
   "private": false,
-  "main": "build/index.js",
-  "module": "build/index.js",
-  "types": "build/index.d.ts",
-  "publishConfig": {
-    "registry": "https://registry.yarnpkg.com"
-  },
+  "description": "关于vikingship的一些描述",
+  "author": "Nick",
+  "license": "MIT",
+  "homepage": "https://www.baidu.com",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "keywords": [
+    "abc",
+    "ui",
+    "react"
+  ],
+  "files": [
+    "dist"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/qiujiahong/comman-ui-nick.git"
@@ -31,13 +40,14 @@
     "web-vitals": "^0.2.4"
   },
   "scripts": {
-    "clean": "rimraf ./build",
+    "clean": "rimraf ./dist",
     "start": "react-scripts start",
     "build": "npm run clean && npm run build-ts && npm run build-css",
     "build-ts": "tsc -p tsconfig.build.json",
-    "build-css": "node-sass ./src/styles/index.scss ./build/index.css",
+    "build-css": "node-sass ./src/styles/index.scss ./dist/index.css",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "prepublish": "npm run build"
   },
   "eslintConfig": {
     "extends": [
