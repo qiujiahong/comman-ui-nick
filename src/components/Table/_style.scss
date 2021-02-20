@@ -1,0 +1,30 @@
+.TableWrapper{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  table {
+    border-right: 0px solid #804040;
+    border-bottom: 0px solid #804040;
+    border-collapse: collapse;
+    table-layout: fixed;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    tr{
+      display: flex;
+      justify-content: space-around;
+    }
+  }
+  table td {
+    border-left: 0px solid #804040;
+    border-top: 0px solid #804040;
+    text-align: center;
+  }
+  table th {
+    text-align: center;
+    flex : 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}

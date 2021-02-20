@@ -1,22 +1,49 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Button, { ButtonType, ButtonSize } from './components/Button/button'
 import Alert from './components/Alert/alert'
 import Menu from './components/Menu/menu'
 import MenuItem from './components/Menu/menuItem'
 import SubMenu from './components/Menu/subMenu'
-
-// import logo from './logo.svg';
-// import './App.css';
-
+import Table from './components/Table'
 
 function App() {
-
+  const [stayTime,setStayTime] = useState(5000)
   const closeAlert1 = () => {
     console.log("on close alert1")
   }
   return (
     <div className="App">
       <header className="App-header">
+      <Button btnType={ButtonType.Primary} size={ButtonSize.Small} onClick={()=>{
+        setStayTime(p=>{
+          p+=1000
+          console.log(p)
+          return p
+        })
+      }}>
+          ++
+        </Button>
+
+        <Button btnType={ButtonType.Primary} size={ButtonSize.Small} onClick={()=>{
+        setStayTime(p=>{
+          p-=1000
+          console.log(p)
+          return p
+        })
+      }}>
+          --
+        </Button>
+
+        <Table
+        titleAlign={"left"}
+          titleColor={"red"}
+          bodyData={[["1.1","1.2"],["2.1","2.2"],["3.1","3.2"],["4.1","4.2"],["5.1","5.2"]]}
+          header={["h.1","h.2"]}
+          bodyBackground={['#0f2444','#0a1a37']}
+          pageSize={2}
+          stayTime={stayTime}>
+
+        </Table>
         <Menu mode={'vertical'} defaultIndex={0} onSelect={(index) => { alert(index) }}>
           <MenuItem >cool link 0</MenuItem>
           <MenuItem disabled>cool link 1</MenuItem>
@@ -60,24 +87,7 @@ function App() {
           href="https://www.baidu.com">
           baidu link disable
         </Button>
-        {/* <h1>hello word</h1> 
-        <h2>hello word</h2>
-        <h3>hello word</h3>
-        <hr />
-        <code>
-          const a = 'b'
-        </code> */}
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+
       </header>
     </div >
   );
