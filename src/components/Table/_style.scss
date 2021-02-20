@@ -1,3 +1,11 @@
+.HorizTableWrapper{
+  display: flex;
+  flex-direction: column;
+  .HorizTables{
+    display: flex;
+    flex-direction: row;
+  }
+}
 .TableWrapper{
   display: flex;
   flex-direction: column;

@@ -4,37 +4,9 @@ import React, { useEffect, useState } from "react"
 import deepcopy from 'ts-deepcopy'
 // import { AlignRule } from '../types'
 import useInterval from 'use-interval'
+import {ITableProps} from './TableProps'
 
 
-
-
-export type AlignRule = 'center' | 'left' | 'right' | 'top' | 'down' | undefined;
-type TextAlignProperty =  "center" | "end" | "justify" | "left" | "match-parent" | "right" | "start";
-
-export interface ITableProps {
-  width?: string,
-  height?: string,
-  reverse?: boolean,
-  align? :  AlignRule,
-  title?: string,
-  titleColor?: string,
-  titleAlign?: TextAlignProperty  //TextAlign
-  titleSize?: string,
-  border?: string,
-  headerColor?: string
-  headerBackground?: string
-  headerSize?: string
-  bodyColor?: string
-  bodyBackground: string[]
-  bodySize?: string
-  fillSize?: number      //需填充的行数
-  horizontalPage?: number //横向分页
-  pageSize?: number  //最多可以显示10条记录
-  stayTime?: number   //每页记录停留多少ms
-  bodyData: string[][]      //body 二维数组
-  header:string[]
-  cols?: number
-}
 
 interface Page {
   currentPage: number,
@@ -119,27 +91,6 @@ export const Table: React.FC<ITableProps> = (props) => {
     }
 
     const nextPage = ()=> {
-        // setPage(p => {
-        //     let {
-        //         currentPage,
-        //         pages,
-        //         limit
-        //     } = page
-        //     currentPage ++ 
-        //     if(currentPage >= pages){
-        //         currentPage = 0
-        //     }
-        //     setBody(fillArray(
-        //       bodyData.slice(currentPage * limit, currentPage * limit + limit),
-        //        props.pageSize as number,props.cols as number))
-        //     p.currentPage = currentPage
-        //     return  {
-        //       currentPage:p.currentPage,
-        //       pages:p.pages,
-        //       limit:p.limit
-        //     }
-        //   })
-
         let {
             currentPage,
             pages,
@@ -161,7 +112,7 @@ export const Table: React.FC<ITableProps> = (props) => {
             pages,
             limit
         } = page;
-        console.log("test111",props)
+        // console.log("test111",props)
         const dataSize: number = bodyData.length
         limit = (pageSize === undefined ? 10000000 : pageSize)
         pages = pageCount(dataSize, limit)
@@ -316,7 +267,7 @@ Table.defaultProps = {
   width: '100%',
   reverse: false,
   align: 'center',
-  title: '日累计接单量及工作负荷度',
+  title: '',
   titleColor: '#ffffff',
   titleSize: '20px',
   titleAlign: 'center',

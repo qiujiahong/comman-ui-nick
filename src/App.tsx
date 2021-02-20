@@ -4,7 +4,7 @@ import Alert from './components/Alert/alert'
 import Menu from './components/Menu/menu'
 import MenuItem from './components/Menu/menuItem'
 import SubMenu from './components/Menu/subMenu'
-import Table from './components/Table'
+import Table,{HorizontalTable} from './components/Table'
 
 function App() {
   const [stayTime,setStayTime] = useState(5000)
@@ -33,8 +33,22 @@ function App() {
       }}>
           --
         </Button>
+        <HorizontalTable
+          title="标题1ww"
+          titleSize="30px"
+          titleAlign={"center"}
+          titleColor={"red"}
+          bodyData={[["1.1","1.2"],["2.1","2.2"],["3.1","3.2"],["4.1","4.2"],["5.1","5.2"]]}
+          header={["h.1","h.2"]}
+          bodyBackground={['#0f2444','#0a1a37','#0f3454','#0a2a47']}
+          pageSize={2}
+          stayTime={stayTime}
+          horizontalPage={3}
+          >
+        </HorizontalTable>
 
         <Table
+        title="标题1"
         titleAlign={"left"}
           titleColor={"red"}
           bodyData={[["1.1","1.2"],["2.1","2.2"],["3.1","3.2"],["4.1","4.2"],["5.1","5.2"]]}
@@ -42,7 +56,6 @@ function App() {
           bodyBackground={['#0f2444','#0a1a37']}
           pageSize={2}
           stayTime={stayTime}>
-
         </Table>
         <Menu mode={'vertical'} defaultIndex={0} onSelect={(index) => { alert(index) }}>
           <MenuItem >cool link 0</MenuItem>
