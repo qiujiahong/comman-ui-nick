@@ -26,4 +26,5 @@ export interface ITableProps {
   bodyData: string[][]      //body 二维数组
   header:string[]
   cols?: number
+  balance?: boolean   //数据均衡，在多大列的情况下，每大列的数据是否均衡
 }

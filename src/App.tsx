@@ -38,12 +38,24 @@ function App() {
           titleSize="30px"
           titleAlign={"center"}
           titleColor={"red"}
-          bodyData={[["1.1","1.2"],["2.1","2.2"],["3.1","3.2"],["4.1","4.2"],["5.1","5.2"]]}
+          bodyData={[
+                      ["1.1","1.2"],
+                      ["2.1","2.2"],
+                      ["3.1","3.2"],
+                      ["4.1","4.2"],
+                      ["5.1","5.2"],
+                      ["6.1","6.2"],
+                      ["7.1","7.2"],
+                      ["8.1","8.2"],
+                      ["9.1","9.2"],
+                      ["10.1","10.2"],
+                    ]}
           header={["h.1","h.2"]}
           bodyBackground={['#0f2444','#0a1a37','#0f3454','#0a2a47']}
-          pageSize={2}
+          pageSize={4}
           stayTime={stayTime}
-          horizontalPage={3}
+          horizontalPage={2}
+          balance={true}
           >
         </HorizontalTable>
 

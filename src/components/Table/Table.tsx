@@ -100,7 +100,7 @@ export const Table: React.FC<ITableProps> = (props) => {
         if(currentPage >= pages){
             currentPage = 0
         }
-        console.log("currentPage:",currentPage)
+        // console.log("currentPage:",currentPage)
         let tempData =props.bodyData.slice(currentPage * limit, currentPage * limit + limit)
         setBody(fillArray(tempData,pageSize || 10 ,cols ||1 ))
         setPage({currentPage,pages,limit})

@@ -20,6 +20,7 @@ export const HorizontalTable: React.FC<ITableProps> = (props) => {
         titleColor,
         titleSize,
         titleAlign,
+        balance
     } = props;
 
     const [tableProps,setTableProps] = useState<ITableProps[]>();
@@ -33,8 +34,7 @@ export const HorizontalTable: React.FC<ITableProps> = (props) => {
     useInterval(() => {
         nextPage()
       }, props.stayTime || 5000);
-
-
+      
     const nextPage = ()=>{
         let {
             current,
@@ -51,35 +51,48 @@ export const HorizontalTable: React.FC<ITableProps> = (props) => {
         tempProps.bodyBackground = []
         tempProps.bodyData = []
         let bodys:string[][][] = getBodys(props.bodyData,limit)
+
+        let avgRecords = Math.ceil(bodys[current].length / (horizontalPage||1)) 
+        let min = Math.min((props.pageSize||10),avgRecords)
         for(let page = 0 ; page < (horizontalPage || 1)  ; page++){
             let temp = deepcopy<ITableProps>(tempProps);
             temp.header = [...props.header]
-            if(page%2 === 0){
-                temp.bodyBackground = [props.bodyBackground[0],props.bodyBackground[1]]
-            }else {
-                temp.bodyBackground = [props.bodyBackground[2],props.bodyBackground[3]]
+            temp.bodyBackground = getBodyBackground(page,props.bodyBackground)
+            if(balance){
+                temp.bodyData = bodys[current].splice(0,min)
+            }else{
+                temp.bodyData = bodys[current].splice(0,props.pageSize)
             }
-            temp.bodyData = bodys[curPage].splice(0,props.pageSize)
             list.push(temp);
         }
         setTableProps(list)
         setPage({current,pages,limit})
       }
+    // @body  - 数据
+    // @limit - 限制
+    // @pages - 有多少页
     const getBodys = (body:string[][],limit: number)=>{
         let temp = deepcopy<string[][]>(body);
-        let bodys:string[][][] =[]
+        let bodys:string[][][] = []
         let count = true
         do{
             let s:string[][] = temp.splice(0,limit)
             if(s.length !== 0){
-                // bodys.push(deepcopy<[][]>(s))
                 bodys.push(s)
             }else {
                 count = false;
             }
         } while(count)
-        // console.log("SetBodys:",bodys,limit)
         return bodys;
+    }
+    const getBodyBackground = (page:number,bg:string[])=>{
+        let ret 
+        if(page%2 === 0){
+            ret = [bg[0],bg[1]]
+        }else {
+            ret = [bg[2],bg[3]]
+        }
+        return ret
     }
     useEffect(() => {
         let {
@@ -87,18 +100,19 @@ export const HorizontalTable: React.FC<ITableProps> = (props) => {
             pages,
             limit,  
         } = page;
-        if(props.bodyData !== undefined  && props.bodyData.length > 0) {
+        if(bodyData !== undefined  && bodyData.length > 0) {
             // console.log('props1:',props,props.body[0].length)
             //1. 拆分大页 props.body
-            let dataSize = props.bodyData.length;
-            limit = (horizontalPage || 1) * (props.pageSize as number)
+            let dataSize = bodyData.length;
+            // 一大页最多能放多少条数据
+            limit = (horizontalPage || 1) * (props.pageSize ||10)
             pages = Math.ceil(dataSize/limit)
             setPage({current,pages,limit})
 
-            let bodys:string[][][] = getBodys(props.bodyData,limit)
+            let bodys:string[][][] = getBodys(bodyData,limit)
         
             if(current  > bodys.length - 1){
-                if(bodys.length != 0 ){
+                if(bodys.length !== 0 ){
                     current = bodys.length -1;
                 }
             }
@@ -112,16 +126,17 @@ export const HorizontalTable: React.FC<ITableProps> = (props) => {
             tempProps.header = []
             tempProps.bodyBackground = []
             tempProps.bodyData = []
-            for(let page = 0 ; 
-                page < (horizontalPage || 1)  ; page++){
+            let avgRecords = Math.ceil(bodys[current].length / (horizontalPage||1)) 
+            let min = Math.min((props.pageSize||10),avgRecords)
+            for(let page = 0 ; page < (horizontalPage || 1)  ; page++){
                 let temp = deepcopy<ITableProps>(tempProps);
                 temp.header = [...props.header]
-                if(page%2 === 0){
-                    temp.bodyBackground = [props.bodyBackground[0],props.bodyBackground[1]]
-                }else {
-                    temp.bodyBackground = [props.bodyBackground[2],props.bodyBackground[3]]
+                temp.bodyBackground = getBodyBackground(page,props.bodyBackground)
+                if(balance){
+                    temp.bodyData = bodys[current].splice(0,min)
+                }else{
+                    temp.bodyData = bodys[current].splice(0,props.pageSize)
                 }
-                temp.bodyData = bodys[current].splice(0,props.pageSize)
                 list.push(temp);
             }
             setTableProps(list)
