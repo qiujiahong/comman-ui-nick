@@ -7,11 +7,12 @@ export enum DisplayMode {
 }
 
 interface PlayInfo {
-  curPage: number,
-  nextPage: number,
-  curUrl: string,
-  nextUrl: string,
-  count: number
+  curPage: number,    //props.urls的下标
+  nextPage: number,   //props.urls的下标
+  count: number,
+  topIndex: number,   //disUrl的下标
+  downIndex: number,  //disUrl的下标
+  disUrl: string[]    //props.urls的的值转移2个到disUrl内
 }
 
 
@@ -28,21 +29,17 @@ const FullIframe: React.FC<FullIframeProps> = (props) => {
     urls,
     loadTime,
     stayTime,
-    startPage
   } = props
-
-  const [count, setCount] = useState(0)
-  const [url1, setUrl1] = useState("")
-  const [url2, setUrl2] = useState("")
 
   const [playInfo, SetPlayInfo] = useState<PlayInfo>({
     curPage: 0,
     nextPage: 0,
-    curUrl: '',
-    nextUrl: '',
-    count: 0
+    count: 0,
+    topIndex: 0,
+    downIndex: 1,
+    disUrl: ["", ""]
   })
-  const getPageInfo = (start: number) => {
+  const getInitPageInfo = (start: number) => {
     let cur = start || 0
     if (cur >= urls.length) {
       cur = (urls.length - 1)
@@ -51,44 +48,56 @@ const FullIframe: React.FC<FullIframeProps> = (props) => {
     if (next >= urls.length) {
       next = 0
     }
+
     return {
       curPage: cur,
       nextPage: next,
-      curUrl: urls[cur],
-      nextUrl: urls[next],
-      count: 0
+      count: 0,
+      topIndex: 0,
+      downIndex: Math.min(props.urls.length, 1),
+      disUrl: [urls[cur], ""]
     }
+  }
+
+  const changeDisPage = () => {
+    console.log("changeDisPage")
   }
 
   useEffect(() => {
     const {
       startPage
     } = props
-    const play = getPageInfo(startPage || 0)
-    setUrl1(play.curUrl)
-    setUrl2("")
+    const play = getInitPageInfo(startPage || 0)
     SetPlayInfo(play);
   }, [urls, loadTime, stayTime])
 
 
   useInterval(() => {
     let {
-      count
+      count,
+      disUrl,
+      downIndex,
+      nextPage
     } = playInfo;
     console.log("test", count, stayTime)
     if (count === loadTime) {//加载第二页
       count++;
-      console.log("load next iframe",)
+      disUrl[downIndex] = urls[nextPage]
+      SetPlayInfo(old => {
+        return { ...old, count: ++count, disUrl }
+      })
     }
     else if (count === stayTime) {//显示第二页，第二页变成第一页，更新第二页，复位计数器
-
-      count = 0
+      changeDisPage()
+      SetPlayInfo(old => {
+        return { ...old, count: 0 }
+      })
     } else {
-      count++;
+      SetPlayInfo(old => {
+        return { ...old, count: ++count }
+      })
     }
-    SetPlayInfo(old => {
-      return { ...old, count: count }
-    })
+
 
   }, 1000)
 
@@ -104,15 +113,15 @@ const FullIframe: React.FC<FullIframeProps> = (props) => {
       </div>
       <div className={"play"}>
         {
-          url1 !== "" &&
-          <iframe src={url1} title={"iframe1"} frameBorder="no" style={{
+          playInfo.disUrl[0] !== "" &&
+          <iframe src={playInfo.disUrl[0]} title={"iframe1"} frameBorder="no" style={{
             width: "100%",
             height: "100%",
           }} ></iframe>
         }
         {
-          url2 !== "" &&
-          <iframe src={url2} title={"iframe1"} frameBorder="no" style={{
+          playInfo.disUrl[1] !== "" &&
+          <iframe src={playInfo.disUrl[1]} title={"iframe1"} frameBorder="no" style={{
             width: "100%",
             height: "100%",
           }} ></iframe>
